@@ -1,0 +1,28 @@
+{
+    "name": "pulkitjalan/google-apiclient",
+    "description": "Google api php client wrapper with Cloud Platform and Laravel support",
+    "homepage": "https://github.com/pulkitjalan/google-apiclient",
+    "keywords": ["laravel", "google", "cloud platform"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Pulkit Jalan"
+        }
+    ],
+    "require": {
+        "php": ">=5.4.0",
+        "illuminate/support": "~4|~5",
+        "google/apiclient": "dev-master"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "4.*",
+        "mockery/mockery": "0.9.*"
+    },
+    "autoload": {
+        "psr-4": {
+            "PulkitJalan\\Google\\": "src/"
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
