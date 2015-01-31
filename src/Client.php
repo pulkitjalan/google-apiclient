@@ -63,12 +63,20 @@ class Client
      */
     public function make($service)
     {
-        $service = 'Google_Service_'.ucfirst($service);
+        $service = ucfirst($service);
+        $params = [];
+        if (class_exists('PulkitJalan\Google\Services\\'.$service.'\Client')) {
+            $service = 'PulkitJalan\Google\Services\\'.$service.'\Client';
+            $params = [$this->client, $this->config];
+        } else {
+            $service = 'Google_Service_'.$service;
+            $params = [$this->client];
+        }
 
         if (class_exists($service)) {
             $class = new \ReflectionClass($service);
 
-            return $class->newInstance($this->client);
+            return $class->newInstanceArgs($params);
         }
 
         throw new UnknownServiceException($service);

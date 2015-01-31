@@ -107,6 +107,16 @@ return [
         | Example storage_path().'/key/google.p12'
         */
         'key' => '',
+
+        /*
+        | Example sample-project-999
+        */
+        'project_id' => '',
+
+        /*
+        | Example us-central1-a
+        */
+        'zone' => '',
     ]
 ];
 ```
@@ -139,3 +149,8 @@ $storage->buckets->listBuckets('project id');
 // get object example
 $storage->objects->get('bucket', 'object');
 ```
+
+## TODO
+
+- Workout problem with creating multiple disks
+- Others...

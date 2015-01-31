@@ -60,5 +60,15 @@ return [
         | Example storage_path().'/key/google.p12'
         */
         'key' => '',
+
+        /*
+        | Example sample-project-999
+        */
+        'project_id' => '',
+
+        /*
+        | Example us-central1-a
+        */
+        'zone' => '',
     ]
 ];
