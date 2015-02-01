@@ -1,17 +1,22 @@
 <?php
 
-namespace PulkitJalan\Google\Services\Compute;
+namespace PulkitJalan\Google\Services;
 
-use PulkitJalan\Google\Services\AbstractClient;
-
-class Client extends AbstractClient
+class Compute extends AbstractClient
 {
     /**
      * @var \Google_Service_Compute
      */
-    protected $compute;
+    protected $property;
 
+    /**
+     * @var string
+     */
     protected $defaultImageProject = 'ubuntu-os-cloud';
+
+    /**
+     * @var string
+     */
     protected $defaultImage = 'ubuntu-1404';
 
     /**
@@ -21,54 +26,62 @@ class Client extends AbstractClient
     {
         parent::__construct($client, $config);
 
-        $this->compute = new \Google_Service_Compute($this->client);
+        $this->property = new \Google_Service_Compute($this->client);
     }
 
+    /**
+     * Create an instance
+     *
+     * @param  array                            $params
+     * @return \Google_Service_Compute_Instance
+     */
     public function createInstance(array $params)
     {
         $postBody = new \Google_Service_Compute_Instance();
         $postBody->setName(array_get($params, 'name', $this->getRandomString()));
+        $postBody->setDescription(array_get($params, 'description'));
         $postBody->setCanIpForward(array_get($params, 'forwardIp', false));
-        $postBody->setDescription(array_get($params, 'description', ''));
+
         $postBody->setMachineType($this->getMachineTypeLink(array_get($params, 'machineType', 'n1-standard-1')));
         $postBody->setScheduling($this->getScheduling($params));
 
-        // set disks, default to at boot disk only
-        $postBody->setDisks($this->getDisks(array_get($params, 'disks', ['boot' => []])));
+        // set boot disk
+        $postBody->setDisks($this->getAttachedDisk(array_merge(['boot' => true], array_get($params, 'disk'))));
 
         // set network interface, default without ip
         $postBody->setNetworkInterfaces([$this->getNetworkInterface(array_get($params, 'network', []))]);
 
+        // set metadata if provided
         if (array_get($params, 'metadata')) {
             $postBody->setMetadata($this->getMetaData(array_get($params, 'metadata')));
         }
 
+        // set tags if provided
         if (array_get($params, 'tags')) {
             $postBody->setTags($this->getTags(array_get($params, 'tags')));
         }
 
-        return $this->compute->instances->insert($this->getProject(), $this->getZone(), $postBody);
+        // create instance and return
+        return $this->property->instances->insert($this->getProject(), $this->getZone(), $postBody, array_get($params, 'opts', []));
     }
 
-    public function listInstances(array $params)
+    /**
+     * List instances
+     *
+     * @return \Google_Service_Compute_InstanceList
+     */
+    public function listInstances()
     {
-        return $this->compute->instances->listInstances($this->getProject(), $this->getZone());
+        return $this->property->instances->listInstances($this->getProject(), $this->getZone());
     }
 
-    protected function getDisks(array $params)
-    {
-        $disks = [];
-        foreach ((array) $params as $key => $value) {
-            if ($key === 'boot') {
-                $value['boot'] = true;
-            }
-            $disks[] = $this->getDisk($value);
-        }
-
-        return $disks;
-    }
-
-    protected function getDisk(array $params)
+    /**
+     * Get a disks
+     *
+     * @param  array                                $params
+     * @return \Google_Service_Compute_AttachedDisk
+     */
+    protected function getAttachedDisk(array $params)
     {
         $disk = new \Google_Service_Compute_AttachedDisk();
         $disk->setBoot(array_get($params, 'boot', false));
@@ -87,6 +100,12 @@ class Client extends AbstractClient
         return $disk;
     }
 
+    /**
+     * Get a network interface
+     *
+     * @param  array                                    $params
+     * @return \Google_Service_Compute_NetworkInterface
+     */
     protected function getNetworkInterface(array $params)
     {
         $networkInterface = new \Google_Service_Compute_NetworkInterface();
@@ -94,15 +113,24 @@ class Client extends AbstractClient
 
         if (array_get($params, 'ip', false)) {
             $accessConfig = new \Google_Service_Compute_AccessConfig();
+
+            // if ip field is an ipaddress use static ip
             if (filter_var(array_get($params, 'ip'), FILTER_VALIDATE_IP)) {
                 $accessConfig->setNatIP(array_get($params, 'ip'));
             }
+
             $networkInterface->setAccessConfigs([$accessConfig]);
         }
 
         return $networkInterface;
     }
 
+    /**
+     * Get instance metadata
+     *
+     * @param  array                            $params
+     * @return \Google_Service_Compute_Metadata
+     */
     protected function getMetaData(array $params)
     {
         $metaData = new \Google_Service_Compute_Metadata();
@@ -118,6 +146,12 @@ class Client extends AbstractClient
         return $metaData;
     }
 
+    /**
+     * Get instance tags
+     *
+     * @param  array                        $params
+     * @return \Google_Service_Compute_Tags
+     */
     protected function getTags(array $params)
     {
         $tags = new \Google_Service_Compute_Tags();
@@ -126,6 +160,12 @@ class Client extends AbstractClient
         return $tags;
     }
 
+    /**
+     * Get instance scheduling
+     *
+     * @param  array                              $params
+     * @return \Google_Service_Compute_Scheduling
+     */
     protected function getScheduling(array $params)
     {
         $scheduling = new \Google_Service_Compute_Scheduling();
@@ -135,21 +175,47 @@ class Client extends AbstractClient
         return $scheduling;
     }
 
+    /**
+     * Get link for disk type
+     *
+     * @param  string $diskType default: pd-standard
+     * @return string
+     */
     protected function getDiskTypeLink($diskType = 'pd-standard')
     {
         return 'https://www.googleapis.com/compute/v1/projects/'.$this->getProject().'/zones/'.$this->getZone().'/diskTypes/'.$diskType;
     }
 
+    /**
+     * Get link for maching type
+     *
+     * @param  string $machineType default: n1-standard-1
+     * @return string
+     */
     protected function getMachineTypeLink($machineType = 'n1-standard-1')
     {
         return 'https://www.googleapis.com/compute/v1/projects/'.$this->getProject().'/zones/'.$this->getZone().'/machineTypes/'.$machineType;
     }
 
+    /**
+     * Get link for project network
+     *
+     * @param  string $network
+     * @return string
+     */
     protected function getNetworkLink($network = 'default')
     {
         return 'https://www.googleapis.com/compute/v1/projects/'.$this->getProject().'/global/networks/'.$network;
     }
 
+    /**
+     * Get link for image, first check current project
+     * else defaults to default images project
+     *
+     * @param  string $image   default: ubuntu-1404
+     * @param  string $project
+     * @return string
+     */
     protected function getImageLink($image = 'ubuntu-1404', $project = null)
     {
         $project = $project ?: $this->getProject();

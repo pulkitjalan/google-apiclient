@@ -66,4 +66,24 @@ abstract class AbstractClient
 
         return $str[array_rand($str)].strtolower(str_random($length-1));
     }
+
+    /**
+     * Magic get method
+     *
+     * @param  string          $name
+     * @return mixed
+     * @throws \ErrorException
+     */
+    public function __get($name)
+    {
+        if (property_exists($this, $name)) {
+            return $this->$name;
+        }
+
+        if (property_exists($this->property, $name)) {
+            return $this->property->$name;
+        }
+
+        throw new \ErrorException('Undefined property: '.get_class($this).'::$'.$name.' or '.get_class($this->property).'::$'.$name);
+    }
 }

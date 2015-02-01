@@ -65,8 +65,8 @@ class Client
     {
         $service = ucfirst($service);
         $params = [];
-        if (class_exists('PulkitJalan\Google\Services\\'.$service.'\Client')) {
-            $service = 'PulkitJalan\Google\Services\\'.$service.'\Client';
+        if (class_exists('PulkitJalan\Google\Services\\'.$service)) {
+            $service = 'PulkitJalan\Google\Services\\'.$service;
             $params = [$this->client, $this->config];
         } else {
             $service = 'Google_Service_'.$service;
