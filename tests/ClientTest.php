@@ -1,9 +1,9 @@
 <?php
 
-namespace PulkitJalan\Google\Tests;
+namespace PulkitJalan\Google\tests;
 
-use PHPUnit_Framework_TestCase;
 use Mockery;
+use PHPUnit_Framework_TestCase;
 
 class ClientTest extends PHPUnit_Framework_TestCase
 {
@@ -47,8 +47,8 @@ class ClientTest extends PHPUnit_Framework_TestCase
         $client = new \PulkitJalan\Google\Client([
             'service' => [
                 'account' => 'name',
-                'scopes' => ['scope'],
-                'key' => __DIR__.'/data/cert.p12',
+                'scopes'  => ['scope'],
+                'key'     => __DIR__.'/data/cert.p12',
             ],
         ]);
 

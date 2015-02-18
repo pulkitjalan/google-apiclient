@@ -45,7 +45,7 @@ class Client
     }
 
     /**
-     * Getter for the google client
+     * Getter for the google client.
      *
      * @return \Google_Client
      */
@@ -55,11 +55,13 @@ class Client
     }
 
     /**
-     * Getter for the google service
+     * Getter for the google service.
      *
-     * @param  string          $service
-     * @return \Google_Service
+     * @param string $service
+     *
      * @throws \Exception
+     *
+     * @return \Google_Service
      */
     public function make($service)
     {
@@ -75,7 +77,7 @@ class Client
     }
 
     /**
-     * Setup correct auth method based on type
+     * Setup correct auth method based on type.
      *
      * @return void
      */
@@ -97,7 +99,7 @@ class Client
     }
 
     /**
-     * Determine and use credentials if user has set them
+     * Determine and use credentials if user has set them.
      *
      * @return boolean used or not
      */
@@ -120,7 +122,7 @@ class Client
 
     /**
      * Determine and use app engine credentials
-     * if running on app engine
+     * if running on app engine.
      *
      * @return boolean used or not
      */
@@ -138,17 +140,19 @@ class Client
     }
 
     /**
-     * Magic call method
+     * Magic call method.
      *
-     * @param  string                  $method
-     * @param  array                   $parameters
-     * @return mixed
+     * @param string $method
+     * @param array  $parameters
+     *
      * @throws \BadMethodCallException
+     *
+     * @return mixed
      */
     public function __call($method, $parameters)
     {
         if (method_exists($this->client, $method)) {
-            return call_user_func_array(array($this->client, $method), $parameters);
+            return call_user_func_array([$this->client, $method], $parameters);
         }
 
         throw new \BadMethodCallException(sprintf('Method [%s] does not exist.', $method));

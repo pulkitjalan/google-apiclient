@@ -17,11 +17,11 @@ return [
     | https://developers.google.com/console
     |
     */
-    'client_id' => '',
-    'client_secret' => '',
-    'redirect_uri' => '',
-    'scopes' => [],
-    'access_type' => 'online',
+    'client_id'       => '',
+    'client_secret'   => '',
+    'redirect_uri'    => '',
+    'scopes'          => [],
+    'access_type'     => 'online',
     'approval_prompt' => 'auto',
 
     /*
@@ -60,5 +60,5 @@ return [
         | Example storage_path().'/key/google.p12'
         */
         'key' => '',
-    ]
+    ],
 ];
