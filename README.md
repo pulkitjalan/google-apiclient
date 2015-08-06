@@ -26,6 +26,8 @@ Install via composer - edit your `composer.json` to require the package.
 
 Then run `composer update` in your terminal to pull it in.
 
+Or use `composer require pulkitjalan/google-apiclient`
+
 ## Laravel
 
 To use in laravel add the following to the `providers` array in your `config/app.php`
