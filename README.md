@@ -20,7 +20,7 @@ Install via composer - edit your `composer.json` to require the package.
 
 ```js
 "require": {
-    "pulkitjalan/google-apiclient": "dev-master"
+    "pulkitjalan/google-apiclient": "1.*"
 }
 ```
 
