@@ -1,7 +1,7 @@
 Google Api Client Wrapper
 =========
 
-> Google api php client wrapper with Cloud Platform and Laravel support
+> Google api php client wrapper with Cloud Platform and Laravel 4 & 5 support
 
 [![Build Status](http://img.shields.io/travis/pulkitjalan/google-apiclient.svg?style=flat-square)](https://travis-ci.org/pulkitjalan/google-apiclient)
 [![Scrutinizer Code Quality](http://img.shields.io/scrutinizer/g/pulkitjalan/google-apiclient/master.svg?style=flat-square)](https://scrutinizer-ci.com/g/pulkitjalan/google-apiclient/)
@@ -42,7 +42,11 @@ Next add the following to the `aliases` array in your `config/app.php`
 'Google' => 'PulkitJalan\Google\Facades\Google'
 ```
 
-Finally run `php artisan config:publish pulkitjalan/google-apiclient` to publish the config file.
+Finally run `php artisan vendor:publish --provider="pulkitjalan\google-apiclient\GoogleServiceProvider" --tag="config"` to publish the config file.
+
+#### Looking for a Laravel 4 compatible version?
+
+Checkout the [1.0 branch](https://github.com/pulkitjalan/google-apiclient/tree/1.0)
 
 ## Usage
 

@@ -21,6 +21,10 @@ class GoogleServiceProvider extends ServiceProvider
         $this->app['PulkitJalan\Google\Client'] = function ($app) {
             return $app['google.api.client'];
         };
+
+        $this->publishes([
+            __DIR__.'/config/config.php' => config_path('google.php'),
+        ], 'config');
     }
 
     /**
@@ -30,10 +34,10 @@ class GoogleServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->config->package('pulkitjalan/google-apiclient', realpath(__DIR__.'/config'), 'google');
+        $this->mergeConfigFrom(__DIR__.'/config/config.php', 'google');
 
         $this->app['google.api.client'] = $this->app->share(function () {
-            return new Client($this->app->config->get('google::config'));
+            return new Client(config('google'));
         });
     }
 
