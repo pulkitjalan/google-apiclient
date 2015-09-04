@@ -42,7 +42,7 @@ Next add the following to the `aliases` array in your `config/app.php`
 'Google' => 'PulkitJalan\Google\Facades\Google'
 ```
 
-Finally run `php artisan vendor:publish --provider="pulkitjalan\google-apiclient\GoogleServiceProvider" --tag="config"` to publish the config file.
+Finally run `php artisan vendor:publish --provider="PulkitJalan\Google\GoogleServiceProvider" --tag="config"` to publish the config file.
 
 #### Looking for a Laravel 4 compatible version?
 
