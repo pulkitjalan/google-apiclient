@@ -33,13 +33,13 @@ Or use `composer require pulkitjalan/google-apiclient`
 To use in laravel add the following to the `providers` array in your `config/app.php`
 
 ```php
-'PulkitJalan\Google\GoogleServiceProvider'
+PulkitJalan\Google\GoogleServiceProvider::class
 ```
 
 Next add the following to the `aliases` array in your `config/app.php`
 
 ```php
-'Google' => 'PulkitJalan\Google\Facades\Google'
+'Google' => PulkitJalan\Google\Facades\Google::class
 ```
 
 Finally run `php artisan vendor:publish --provider="PulkitJalan\Google\GoogleServiceProvider" --tag="config"` to publish the config file.
