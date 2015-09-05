@@ -41,7 +41,9 @@ class Client
         $this->client->setDeveloperKey(array_get($config, 'developer_key', ''));
 
         // auth for service account
-        $this->auth();
+        if (array_get($config, 'service.enable', false)) {
+            $this->auth();
+        }
     }
 
     /**

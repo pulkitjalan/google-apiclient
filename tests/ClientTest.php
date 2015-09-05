@@ -15,12 +15,14 @@ class ClientTest extends PHPUnit_Framework_TestCase
     public function testClientGetter()
     {
         $client = Mockery::mock('PulkitJalan\Google\Client', [[]])->makePartial();
+
         $this->assertInstanceOf('Google_Client', $client->getClient());
     }
 
     public function testServiceMake()
     {
         $client = Mockery::mock('PulkitJalan\Google\Client', [[]])->makePartial();
+
         $this->assertInstanceOf('Google_Service_Storage', $client->make('storage'));
     }
 
@@ -39,13 +41,21 @@ class ClientTest extends PHPUnit_Framework_TestCase
 
         $this->setExpectedException('BadMethodCallException');
 
-        $client->getAuth2();
+        $client->getAuthTest();
+    }
+
+    public function testDefaultAuth()
+    {
+        $client = new \PulkitJalan\Google\Client([]);
+
+        $this->assertInstanceOf('Google_Auth_OAuth2', $client->getAuth());
     }
 
     public function testAssertCredentials()
     {
         $client = new \PulkitJalan\Google\Client([
             'service' => [
+                'enable' => true,
                 'account' => 'name',
                 'scopes'  => ['scope'],
                 'key'     => __DIR__.'/data/cert.p12',
@@ -58,7 +68,12 @@ class ClientTest extends PHPUnit_Framework_TestCase
     public function testAppEngineCredentials()
     {
         $_SERVER['SERVER_SOFTWARE'] = 'Google App Engine';
-        $client = new \PulkitJalan\Google\Client([]);
+
+        $client = new \PulkitJalan\Google\Client([
+            'service' => [
+                'enable' => true,
+            ],
+        ]);
 
         $this->assertInstanceOf('Google_Auth_AppIdentity', $client->getAuth());
 
@@ -67,7 +82,11 @@ class ClientTest extends PHPUnit_Framework_TestCase
 
     public function testComputeEngineCredentials()
     {
-        $client = new \PulkitJalan\Google\Client([]);
+        $client = new \PulkitJalan\Google\Client([
+            'service' => [
+                'enable' => true,
+            ],
+        ]);
 
         $this->assertInstanceOf('Google_Auth_ComputeEngine', $client->getAuth());
     }

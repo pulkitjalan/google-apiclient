@@ -40,11 +40,16 @@ return [
     | Google service account
     |----------------------------------------------------------------------------
     |
-    | Set the information below to use assert credentials
-    | Leave blank to use app engine or compute engine.
+    | Enable and set the information below to use assert credentials
+    | Enable and leave blank to use app engine or compute engine.
     |
     */
     'service' => [
+        /*
+        | Enable service account auth or not.
+        */
+        'enable' => false,
+
         /*
         | Example xxx@developer.gserviceaccount.com
         */
