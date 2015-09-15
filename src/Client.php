@@ -18,8 +18,9 @@ class Client
 
     /**
      * @param array $config
+     * @param string $userEmail
      */
-    public function __construct(array $config)
+    public function __construct(array $config, $userEmail='')
     {
         $this->config = $config;
 
@@ -42,7 +43,7 @@ class Client
 
         // auth for service account
         if (array_get($config, 'service.enable', false)) {
-            $this->auth();
+            $this->auth($userEmail);
         }
     }
 
@@ -81,12 +82,13 @@ class Client
     /**
      * Setup correct auth method based on type.
      *
+     * @param $userEmail
      * @return void
      */
-    protected function auth()
+    protected function auth($userEmail='')
     {
         // see (and use) if user has set Credentials
-        if ($this->useAssertCredentials()) {
+        if ($this->useAssertCredentials($userEmail)) {
             return;
         }
 
@@ -102,10 +104,10 @@ class Client
 
     /**
      * Determine and use credentials if user has set them.
-     *
+     * @param $userEmail
      * @return boolean used or not
      */
-    protected function useAssertCredentials()
+    protected function useAssertCredentials($userEmail='')
     {
         $account = array_get($this->config, 'service.account', '');
         if (!empty($account)) {
@@ -114,6 +116,9 @@ class Client
                 array_get($this->config, 'service.scopes', []),
                 file_get_contents(array_get($this->config, 'service.key', ''))
             );
+            if($userEmail){
+                $cert->sub=$userEmail;
+            }
             $this->client->setAssertionCredentials($cert);
 
             return true;
