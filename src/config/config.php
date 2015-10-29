@@ -6,7 +6,7 @@ return [
     | Google application name
     |----------------------------------------------------------------------------
     */
-    'application_name' => '',
+    'application_name' => env('GOOGLE_APPLICATION_NAME', ''),
 
     /*
     |----------------------------------------------------------------------------
@@ -17,9 +17,9 @@ return [
     | https://developers.google.com/console
     |
     */
-    'client_id'       => '',
-    'client_secret'   => '',
-    'redirect_uri'    => '',
+    'client_id'       => env('GOOGLE_CLIENT_ID', ''),
+    'client_secret'   => env('GOOGLE_CLIENT_SECRET', ''),
+    'redirect_uri'    => env('GOOGLE_REDIRECT', ''),
     'scopes'          => [],
     'access_type'     => 'online',
     'approval_prompt' => 'auto',
@@ -33,7 +33,7 @@ return [
     | a Server key, and not a Browser key.
     |
     */
-    'developer_key' => '',
+    'developer_key' => env('GOOGLE_DEVELOPER_KEY', ''),
 
     /*
     |----------------------------------------------------------------------------
@@ -48,12 +48,12 @@ return [
         /*
         | Enable service account auth or not.
         */
-        'enable' => false,
+        'enable' => env('GOOGLE_SERVICE_ENABLED', false),
 
         /*
         | Example xxx@developer.gserviceaccount.com
         */
-        'account' => '',
+        'account' => env('GOOGLE_SERVICE_ACCOUNT', ''),
 
         /*
         | Example ['https://www.googleapis.com/auth/cloud-platform']
@@ -64,6 +64,6 @@ return [
         | Path to key file
         | Example storage_path().'/key/google.p12'
         */
-        'key' => '',
+        'key' => storage_path().env('GOOGLE_SERVICE_KEY', ''),
     ],
 ];
