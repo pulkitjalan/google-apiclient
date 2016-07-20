@@ -20,7 +20,7 @@ class Client
      * @param array $config
      * @param string $userEmail
      */
-    public function __construct(array $config, $userEmail='')
+    public function __construct(array $config, $userEmail = '')
     {
         $this->config = $config;
 
@@ -85,56 +85,37 @@ class Client
      * @param $userEmail
      * @return void
      */
-    protected function auth($userEmail='')
+    protected function auth($userEmail = '')
     {
         // see (and use) if user has set Credentials
         if ($this->useAssertCredentials($userEmail)) {
             return;
         }
 
-        // check (and use) if running on app engine
-        if ($this->useAppEngine()) {
-            return;
-        }
-
-        // fallback to compute engine
+        // fallback to compute engine or app engine
         $this->client->useApplicationDefaultCredentials();
     }
 
     /**
      * Determine and use credentials if user has set them.
      * @param $userEmail
-     * @return boolean used or not
+     * @return bool used or not
      */
-    protected function useAssertCredentials($userEmail='')
+    protected function useAssertCredentials($userEmail = '')
     {
-        $serviceJsonUrl = array_get($this->config, 'service', '');
-        if (!empty($serviceJsonUrl)) {
-            $this->client->setAuthConfig($serviceJsonUrl);
-            if ($userEmail) {
-                $this->client->setSubject($userEmail);
-            }
-            return true;
+        $serviceJsonUrl = array_get($this->config, 'service.file', '');
+
+        if (empty($serviceJsonUrl)) {
+            return false;
         }
 
-        return false;
-    }
-
-    /**
-     * Determine and use app engine credentials
-     * if running on app engine.
-     *
-     * @return boolean used or not
-     */
-    protected function useAppEngine()
-    {
-        // if running on app engine
-        if ($this->client->isAppEngine()) {
-            $this->client->useApplicationDefaultCredentials();
-            return true;
+        $this->client->setAuthConfig($serviceJsonUrl);
+        
+        if ($userEmail) {
+            $this->client->setSubject($userEmail);
         }
 
-        return false;
+        return true;
     }
 
     /**

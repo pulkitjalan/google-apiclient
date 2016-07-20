@@ -44,54 +44,22 @@ class ClientTest extends PHPUnit_Framework_TestCase
         $client->getAuthTest();
     }
 
-    /*
-     * TODO: Rewrite these tests
-     */
-
-    /*public function testDefaultAuth()
+    public function testNoCredentials()
     {
         $client = new \PulkitJalan\Google\Client([]);
 
-        $this->assertInstanceOf('Google_Auth_OAuth2', $client->getAuth());
+        $this->assertFalse($client->isUsingApplicationDefaultCredentials());
     }
 
-    public function testAssertCredentials()
+    public function testDefaultCredentials()
     {
         $client = new \PulkitJalan\Google\Client([
             'service' => [
                 'enable' => true,
-                'account' => 'name',
-                'scopes'  => ['scope'],
-                'key'     => __DIR__.'/data/cert.p12',
+                'file'   => __DIR__.'/data/test.json',
             ],
         ]);
 
-        $this->assertInstanceOf('Google_Auth_OAuth2', $client->getAuth());
+        $this->assertTrue($client->isUsingApplicationDefaultCredentials());
     }
-
-    public function testAppEngineCredentials()
-    {
-        $_SERVER['SERVER_SOFTWARE'] = 'Google App Engine';
-
-        $client = new \PulkitJalan\Google\Client([
-            'service' => [
-                'enable' => true,
-            ],
-        ]);
-
-        $this->assertInstanceOf('Google_Auth_AppIdentity', $client->getAuth());
-
-        unset($_SERVER['SERVER_SOFTWARE']);
-    }
-
-    public function testComputeEngineCredentials()
-    {
-        $client = new \PulkitJalan\Google\Client([
-            'service' => [
-                'enable' => true,
-            ],
-        ]);
-
-        $this->assertInstanceOf('Google_Auth_ComputeEngine', $client->getAuth());
-    }*/
 }

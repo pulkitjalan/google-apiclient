@@ -97,7 +97,17 @@ return [
     | app engine or compute engine will be used.
     |
     */
-    'service' =>  ''
+    'service' =>  [
+        /*
+        | Enable service account auth or not.
+        */
+        'enabled' => false,
+
+        /*
+        | Path to service account json file
+        */
+        'file' => '',
+    ],
 ];
 
 ```
