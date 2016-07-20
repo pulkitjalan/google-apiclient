@@ -98,8 +98,7 @@ class Client
         }
 
         // fallback to compute engine
-        $auth = new \Google_Auth_ComputeEngine($this->client);
-        $this->client->setAuth($auth);
+        $this->client->useApplicationDefaultCredentials();
     }
 
     /**
@@ -109,18 +108,12 @@ class Client
      */
     protected function useAssertCredentials($userEmail='')
     {
-        $account = array_get($this->config, 'service.account', '');
-        if (!empty($account)) {
-            $cert = new \Google_Auth_AssertionCredentials(
-                array_get($this->config, 'service.account', ''),
-                array_get($this->config, 'service.scopes', []),
-                file_get_contents(array_get($this->config, 'service.key', ''))
-            );
-            if($userEmail){
-                $cert->sub=$userEmail;
+        $serviceJsonUrl = array_get($this->config, 'service', '');
+        if (!empty($serviceJsonUrl)) {
+            $this->client->setAuthConfig($serviceJsonUrl);
+            if ($userEmail) {
+                $this->client->setSubject($userEmail);
             }
-            $this->client->setAssertionCredentials($cert);
-
             return true;
         }
 
@@ -137,9 +130,7 @@ class Client
     {
         // if running on app engine
         if ($this->client->isAppEngine()) {
-            $auth = new \Google_Auth_AppIdentity($this->client);
-            $this->client->setAuth($auth);
-
+            $this->client->useApplicationDefaultCredentials();
             return true;
         }
 
