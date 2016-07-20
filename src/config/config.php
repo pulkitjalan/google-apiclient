@@ -40,30 +40,9 @@ return [
     | Google service account
     |----------------------------------------------------------------------------
     |
-    | Enable and set the information below to use assert credentials
-    | Enable and leave blank to use app engine or compute engine.
+    | Set the credentials JSON's location to use assert credentials, otherwise
+    | app engine or compute engine will be used.
     |
     */
-    'service' => [
-        /*
-        | Enable service account auth or not.
-        */
-        'enable' => env('GOOGLE_SERVICE_ENABLED', false),
-
-        /*
-        | Example xxx@developer.gserviceaccount.com
-        */
-        'account' => env('GOOGLE_SERVICE_ACCOUNT', ''),
-
-        /*
-        | Example ['https://www.googleapis.com/auth/cloud-platform']
-        */
-        'scopes' => [],
-
-        /*
-        | Path to key file
-        | Example storage_path().'/key/google.p12'
-        */
-        'key' => storage_path().env('GOOGLE_SERVICE_KEY', ''),
-    ],
+    'service' => env('GOOGLE_SERVICE_ACCOUNT_JSON_LOCATION', '')
 ];
