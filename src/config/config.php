@@ -40,8 +40,8 @@ return [
     | Google service account
     |----------------------------------------------------------------------------
     |
-    | Enable and set the credentials JSON's location to use assert credentials
-    | Enable and leave blank to use app engine or compute engine.
+    | Set the credentials JSON's location to use assert credentials, otherwise
+    | app engine or compute engine will be used.
     |
     */
     'service' => env('GOOGLE_SERVICE_ACCOUNT_JSON_LOCATION', '')

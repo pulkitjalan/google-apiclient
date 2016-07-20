@@ -93,33 +93,21 @@ return [
     | Google service account
     |----------------------------------------------------------------------------
     |
-    | Set the information below to use assert credentials
-    | Leave blank to use app engine or compute engine.
+    | Set the credentials JSON's location to use assert credentials, otherwise
+    | app engine or compute engine will be used.
     |
     */
-    'service' => [
-        /*
-        | Example xxx@developer.gserviceaccount.com
-        */
-        'account' => '',
-
-        /*
-        | Example ['https://www.googleapis.com/auth/cloud-platform']
-        */
-        'scopes' => [],
-
-        /*
-        | Path to key file
-        | Example storage_path().'/key/google.p12'
-        */
-        'key' => '',
-    ]
+    'service' =>  ''
 ];
+
 ```
 
-To use the Google Cloud Platform Services you can either set the information in the config file under `service`, or if running under compute engine (or app engine) leave it blank.
+To use Google Cloud Platform services, enter the location to the service account JSON file **(not the JSON string itself)**. To use App Engine or Computer Engine, leave it blank.
 
-`NOTE: service => ['account'] is the service Email Address and not the Client ID!`
+From [Google's upgrading document](https://github.com/google/google-api-php-client/blob/master/UPGRADING.md):
+
+> Note: P12s are deprecated in favor of service account JSON, which can be generated in the Credentials section of Google Developer Console.
+
 
 Get `Google_Client`
 ```php
