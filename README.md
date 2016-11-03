@@ -143,3 +143,15 @@ $storage->buckets->listBuckets('project id');
 // get object example
 $storage->objects->get('bucket', 'object');
 ```
+
+Laravel Example:
+```php
+// returns instance of \Google_Service_Storage
+$storage = Google::make('storage');
+
+// list buckets example
+$storage->buckets->listBuckets('project id');
+
+// get object example
+$storage->objects->get('bucket', 'object');
+```
