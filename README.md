@@ -155,3 +155,5 @@ $storage->buckets->listBuckets('project id');
 // get object example
 $storage->objects->get('bucket', 'object');
 ```
+
+Have a look at [google/google-api-php-client-services](https://github.com/google/google-api-php-client-services) to get a full list of the supported Google Services.
