@@ -18,13 +18,11 @@ class GoogleServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $this->app['PulkitJalan\Google\Client'] = function ($app) {
-            return $app['google.api.client'];
-        };
-
-        $this->publishes([
-            __DIR__.'/config/config.php' => config_path('google.php'),
-        ], 'config');
+        if (function_exists('config_path')) {
+            $this->publishes([
+                __DIR__.'/config/config.php' => config_path('google.php'),
+            ], 'config');
+        }
     }
 
     /**
@@ -36,8 +34,8 @@ class GoogleServiceProvider extends ServiceProvider
     {
         $this->mergeConfigFrom(__DIR__.'/config/config.php', 'google');
 
-        $this->app['google.api.client'] = $this->app->share(function () {
-            return new Client(config('google'));
+        $this->app->singleton('PulkitJalan\Google\Client', function ($app) {
+            return new Client($app['config']['google']);
         });
     }
 
@@ -48,6 +46,6 @@ class GoogleServiceProvider extends ServiceProvider
      */
     public function provides()
     {
-        return ['google.api.client', 'PulkitJalan\Google\Client'];
+        return ['PulkitJalan\Google\Client'];
     }
 }
