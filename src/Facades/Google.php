@@ -3,6 +3,7 @@
 namespace PulkitJalan\Google\Facades;
 
 use Illuminate\Support\Facades\Facade;
+use PulkitJalan\Google\Client;
 
 class Google extends Facade
 {
@@ -13,6 +14,6 @@ class Google extends Facade
      */
     protected static function getFacadeAccessor()
     {
-        return 'google.api.client';
+        return Client::class;
     }
 }
