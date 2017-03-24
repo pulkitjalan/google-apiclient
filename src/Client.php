@@ -2,6 +2,7 @@
 
 namespace PulkitJalan\Google;
 
+use Google_Client;
 use PulkitJalan\Google\Exceptions\UnknownServiceException;
 
 class Client
@@ -25,7 +26,7 @@ class Client
         $this->config = $config;
 
         // create an instance of the google client for OAuth2
-        $this->client = new \Google_Client();
+        $this->client = new Google_Client();
 
         // set application name
         $this->client->setApplicationName(array_get($config, 'application_name', ''));
@@ -55,6 +56,20 @@ class Client
     public function getClient()
     {
         return $this->client;
+    }
+    
+    /**
+     * Setter for the google client.
+     *
+     * @param string $client
+     * 
+     * @return self
+     */
+    public function setClient(Google_Client $client)
+    {
+        $this->client = $client;
+        
+        return $this;
     }
 
     /**
