@@ -19,6 +19,17 @@ class ClientTest extends PHPUnit_Framework_TestCase
         $this->assertInstanceOf('Google_Client', $client->getClient());
     }
 
+    public function testClientGetterWithAdditionalConfig()
+    {
+        $client = Mockery::mock('PulkitJalan\Google\Client', [[
+            'config' => [
+                'subject' => 'test',
+            ],
+        ]])->makePartial();
+
+        $this->assertEquals($client->getClient()->getConfig('subject'), 'test');
+    }
+
     public function testServiceMake()
     {
         $client = Mockery::mock('PulkitJalan\Google\Client', [[]])->makePartial();

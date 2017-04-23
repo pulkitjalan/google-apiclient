@@ -26,7 +26,7 @@ class Client
         $this->config = $config;
 
         // create an instance of the google client for OAuth2
-        $this->client = new Google_Client();
+        $this->client = new Google_Client(array_get($config, 'config', []));
 
         // set application name
         $this->client->setApplicationName(array_get($config, 'application_name', ''));
@@ -62,7 +62,7 @@ class Client
      * Setter for the google client.
      *
      * @param string $client
-     * 
+     *
      * @return self
      */
     public function setClient(Google_Client $client)
@@ -126,7 +126,7 @@ class Client
 
         $this->client->setAuthConfig($serviceJsonUrl);
         
-        if ($userEmail) {
+        if (! empty($userEmail)) {
             $this->client->setSubject($userEmail);
         }
 
