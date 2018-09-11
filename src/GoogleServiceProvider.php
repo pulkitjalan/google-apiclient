@@ -34,7 +34,7 @@ class GoogleServiceProvider extends ServiceProvider
     {
         $this->mergeConfigFrom(__DIR__.'/config/config.php', 'google');
 
-        $this->app->singleton('PulkitJalan\Google\Client', function ($app) {
+        $this->app->bind('PulkitJalan\Google\Client', function ($app) {
             return new Client($app['config']['google']);
         });
     }
