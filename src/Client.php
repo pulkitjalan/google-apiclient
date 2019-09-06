@@ -3,6 +3,7 @@
 namespace PulkitJalan\Google;
 
 use Google_Client;
+use Illuminate\Support\Arr;
 use PulkitJalan\Google\Exceptions\UnknownServiceException;
 
 class Client
@@ -26,24 +27,24 @@ class Client
         $this->config = $config;
 
         // create an instance of the google client for OAuth2
-        $this->client = new Google_Client(array_get($config, 'config', []));
+        $this->client = new Google_Client(Arr::get($config, 'config', []));
 
         // set application name
-        $this->client->setApplicationName(array_get($config, 'application_name', ''));
+        $this->client->setApplicationName(Arr::get($config, 'application_name', ''));
 
         // set oauth2 configs
-        $this->client->setClientId(array_get($config, 'client_id', ''));
-        $this->client->setClientSecret(array_get($config, 'client_secret', ''));
-        $this->client->setRedirectUri(array_get($config, 'redirect_uri', ''));
-        $this->client->setScopes(array_get($config, 'scopes', []));
-        $this->client->setAccessType(array_get($config, 'access_type', 'online'));
-        $this->client->setApprovalPrompt(array_get($config, 'approval_prompt', 'auto'));
+        $this->client->setClientId(Arr::get($config, 'client_id', ''));
+        $this->client->setClientSecret(Arr::get($config, 'client_secret', ''));
+        $this->client->setRedirectUri(Arr::get($config, 'redirect_uri', ''));
+        $this->client->setScopes(Arr::get($config, 'scopes', []));
+        $this->client->setAccessType(Arr::get($config, 'access_type', 'online'));
+        $this->client->setApprovalPrompt(Arr::get($config, 'approval_prompt', 'auto'));
 
         // set developer key
-        $this->client->setDeveloperKey(array_get($config, 'developer_key', ''));
+        $this->client->setDeveloperKey(Arr::get($config, 'developer_key', ''));
 
         // auth for service account
-        if (array_get($config, 'service.enable', false)) {
+        if (Arr::get($config, 'service.enable', false)) {
             $this->auth($userEmail);
         }
     }
@@ -57,7 +58,7 @@ class Client
     {
         return $this->client;
     }
-    
+
     /**
      * Setter for the google client.
      *
@@ -68,7 +69,7 @@ class Client
     public function setClient(Google_Client $client)
     {
         $this->client = $client;
-        
+
         return $this;
     }
 
@@ -118,14 +119,14 @@ class Client
      */
     protected function useAssertCredentials($userEmail = '')
     {
-        $serviceJsonUrl = array_get($this->config, 'service.file', '');
+        $serviceJsonUrl = Arr::get($this->config, 'service.file', '');
 
         if (empty($serviceJsonUrl)) {
             return false;
         }
 
         $this->client->setAuthConfig($serviceJsonUrl);
-        
+
         if (! empty($userEmail)) {
             $this->client->setSubject($userEmail);
         }

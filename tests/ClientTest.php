@@ -3,11 +3,11 @@
 namespace PulkitJalan\Google\tests;
 
 use Mockery;
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 
-class ClientTest extends PHPUnit_Framework_TestCase
+class ClientTest extends TestCase
 {
-    public function tearDown()
+    public function tearDown(): void
     {
         Mockery::close();
     }
@@ -41,7 +41,7 @@ class ClientTest extends PHPUnit_Framework_TestCase
     {
         $client = Mockery::mock('PulkitJalan\Google\Client', [[]])->makePartial();
 
-        $this->setExpectedException('PulkitJalan\Google\Exceptions\UnknownServiceException');
+        $this->expectException('PulkitJalan\Google\Exceptions\UnknownServiceException');
 
         $client->make('storag');
     }
@@ -50,7 +50,7 @@ class ClientTest extends PHPUnit_Framework_TestCase
     {
         $client = new \PulkitJalan\Google\Client([]);
 
-        $this->setExpectedException('BadMethodCallException');
+        $this->expectException('BadMethodCallException');
 
         $client->getAuthTest();
     }
@@ -67,7 +67,7 @@ class ClientTest extends PHPUnit_Framework_TestCase
         $client = new \PulkitJalan\Google\Client([
             'service' => [
                 'enable' => true,
-                'file'   => __DIR__.'/data/test.json',
+                'file' => __DIR__.'/data/test.json',
             ],
         ]);
 

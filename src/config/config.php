@@ -17,11 +17,11 @@ return [
     | https://developers.google.com/console
     |
     */
-    'client_id'       => env('GOOGLE_CLIENT_ID', ''),
-    'client_secret'   => env('GOOGLE_CLIENT_SECRET', ''),
-    'redirect_uri'    => env('GOOGLE_REDIRECT', ''),
-    'scopes'          => [],
-    'access_type'     => 'online',
+    'client_id' => env('GOOGLE_CLIENT_ID', ''),
+    'client_secret' => env('GOOGLE_CLIENT_SECRET', ''),
+    'redirect_uri' => env('GOOGLE_REDIRECT', ''),
+    'scopes' => [],
+    'access_type' => 'online',
     'approval_prompt' => 'auto',
 
     /*
@@ -53,7 +53,7 @@ return [
         /*
         | Path to service account json file
         */
-        'file' => env('GOOGLE_SERVICE_ACCOUNT_JSON_LOCATION', '')
+        'file' => env('GOOGLE_SERVICE_ACCOUNT_JSON_LOCATION', ''),
     ],
 
     /*
@@ -62,9 +62,9 @@ return [
     |----------------------------------------------------------------------------
     |
     | Set any additional config variables supported by the Google Client
-    | Details can be found here: 
+    | Details can be found here:
     | https://github.com/google/google-api-php-client/blob/master/src/Google/Client.php
-    | 
+    |
     | NOTE: If client id is specified here, it will get over written by the one above.
     |
     */
