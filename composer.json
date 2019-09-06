@@ -11,7 +11,7 @@
     ],
     "require": {
         "php": ">=5.4.0",
-        "illuminate/support": "~5",
+        "illuminate/support": "*",
         "google/apiclient": "^2.0"
     },
     "require-dev": {
