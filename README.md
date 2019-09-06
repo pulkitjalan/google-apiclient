@@ -1,7 +1,7 @@
 Google Api Client Wrapper
 =========
 
-> Google api php client wrapper with Cloud Platform and Laravel 4 & 5 support
+> Google api php client wrapper with Cloud Platform and Laravel support
 
 [![Latest Stable Version](https://poser.pugx.org/pulkitjalan/google-apiclient/v/stable?format=flat-square)](https://packagist.org/packages/pulkitjalan/google-apiclient)
 [![MIT License](http://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](http://www.opensource.org/licenses/MIT)
