@@ -3,30 +3,25 @@ Google Api Client Wrapper
 
 > Google api php client wrapper with Cloud Platform and Laravel 4 & 5 support
 
+[![Latest Stable Version](https://poser.pugx.org/pulkitjalan/google-apiclient/v/stable?format=flat-square)](https://packagist.org/packages/pulkitjalan/google-apiclient)
+[![MIT License](http://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](http://www.opensource.org/licenses/MIT)
 [![Build Status](http://img.shields.io/travis/pulkitjalan/google-apiclient.svg?style=flat-square)](https://travis-ci.org/pulkitjalan/google-apiclient)
-[![Scrutinizer Code Quality](http://img.shields.io/scrutinizer/g/pulkitjalan/google-apiclient/master.svg?style=flat-square)](https://scrutinizer-ci.com/g/pulkitjalan/google-apiclient/)
+[![Quality Score](http://img.shields.io/scrutinizer/g/pulkitjalan/google-apiclient/master.svg?style=flat-square)](https://scrutinizer-ci.com/g/pulkitjalan/google-apiclient/)
 [![Coverage Status](https://img.shields.io/scrutinizer/coverage/g/pulkitjalan/google-apiclient/master.svg?style=flat-square)](https://scrutinizer-ci.com/g/pulkitjalan/google-apiclient/code-structure/master)
-[![License](http://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](http://www.opensource.org/licenses/MIT)
-[![Latest Version](http://img.shields.io/packagist/v/pulkitjalan/google-apiclient.svg?style=flat-square)](https://packagist.org/packages/pulkitjalan/google-apiclient)
+[![StyleCI](https://styleci.io/repos/29422724/shield)](https://styleci.io/repos/29422724)
 [![Total Downloads](https://img.shields.io/packagist/dt/pulkitjalan/google-apiclient.svg?style=flat-square)](https://packagist.org/packages/pulkitjalan/google-apiclient)
 
 ## Requirements
 
-This package requires PHP >=5.4
+* PHP >=7.2
 
 ## Installation
 
-Install via composer - edit your `composer.json` to require the package.
+Install via composer
 
-```js
-"require": {
-    "pulkitjalan/google-apiclient": "3.*"
-}
+```bash
+composer require pulkitjalan/google-apiclient
 ```
-
-Then run `composer update` in your terminal to pull it in.
-
-Or use `composer require pulkitjalan/google-apiclient`
 
 ## Laravel
 
@@ -44,9 +39,9 @@ Next add the following to the `aliases` array in your `config/app.php`
 
 Finally run `php artisan vendor:publish --provider="PulkitJalan\Google\GoogleServiceProvider" --tag="config"` to publish the config file.
 
-#### Looking for a Laravel 4 compatible version?
+#### Using an older version of PHP / Laravel?
 
-Checkout the [1.0 branch](https://github.com/pulkitjalan/google-apiclient/tree/1.0)
+If you are on a PHP version below 7.2 or a Laravel version below 5.8 just use an older version of this package.
 
 ## Usage
 
