@@ -20,7 +20,7 @@ class GoogleServiceProvider extends ServiceProvider
     {
         if (function_exists('config_path')) {
             $this->publishes([
-                __DIR__.'/config/config.php' => config_path('google.php'),
+                __DIR__.'/../config/google.php' => config_path('google.php'),
             ], 'config');
         }
     }
@@ -32,7 +32,7 @@ class GoogleServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->mergeConfigFrom(__DIR__.'/config/config.php', 'google');
+        $this->mergeConfigFrom(__DIR__.'/../config/google.php', 'google');
 
         $this->app->bind('PulkitJalan\Google\Client', function ($app) {
             return new Client($app['config']['google']);
