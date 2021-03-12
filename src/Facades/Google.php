@@ -5,6 +5,9 @@ namespace PulkitJalan\Google\Facades;
 use PulkitJalan\Google\Client;
 use Illuminate\Support\Facades\Facade;
 
+/**
+ * @mixin Client
+ */
 class Google extends Facade
 {
     /**
