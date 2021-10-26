@@ -2,8 +2,8 @@
 
 namespace PulkitJalan\Google;
 
-use Google\Client as GoogleClient;
 use Illuminate\Support\Arr;
+use Google\Client as GoogleClient;
 use PulkitJalan\Google\Exceptions\UnknownServiceException;
 
 class Client
@@ -19,8 +19,8 @@ class Client
     protected $client;
 
     /**
-     * @param array $config
-     * @param string $userEmail
+     * @param  array  $config
+     * @param  string  $userEmail
      */
     public function __construct(array $config, $userEmail = '')
     {
@@ -62,8 +62,7 @@ class Client
     /**
      * Setter for the google client.
      *
-     * @param string $client
-     *
+     * @param  string  $client
      * @return self
      */
     public function setClient(GoogleClient $client)
@@ -76,11 +75,10 @@ class Client
     /**
      * Getter for the google service.
      *
-     * @param string $service
+     * @param  string  $service
+     * @return \Google_Service
      *
      * @throws \Exception
-     *
-     * @return \Google_Service
      */
     public function make($service)
     {
@@ -114,6 +112,7 @@ class Client
 
     /**
      * Determine and use credentials if user has set them.
+     *
      * @param $userEmail
      * @return bool used or not
      */
@@ -137,12 +136,11 @@ class Client
     /**
      * Magic call method.
      *
-     * @param string $method
-     * @param array  $parameters
+     * @param  string  $method
+     * @param  array  $parameters
+     * @return mixed
      *
      * @throws \BadMethodCallException
-     *
-     * @return mixed
      */
     public function __call($method, $parameters)
     {
