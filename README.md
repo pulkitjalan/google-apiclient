@@ -41,7 +41,7 @@ Finally run `php artisan vendor:publish --provider="PulkitJalan\Google\GoogleSer
 
 #### Using an older version of PHP / Laravel?
 
-If you are on a PHP version below 7.2 or a Laravel version below 5.8 just use an older version of this package.
+If you are on a PHP version below 7.2 or a Laravel version below 6.0 just use an older version of this package.
 
 ## Usage
 
