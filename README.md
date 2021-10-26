@@ -114,7 +114,7 @@ From [Google's upgrading document](https://github.com/google/google-api-php-clie
 > Note: P12s are deprecated in favor of service account JSON, which can be generated in the Credentials section of Google Developer Console.
 
 
-Get `Google_Client`
+Get `Google\Client`
 ```php
 $client = new PulkitJalan\Google\Client($config);
 $googleClient = $client->getClient();
