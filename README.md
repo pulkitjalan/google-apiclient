@@ -129,7 +129,7 @@ Get a service
 ```php
 $client = new PulkitJalan\Google\Client($config);
 
-// returns instance of \Google_Service_Storage
+// returns instance of \Google\Service\Storage
 $storage = $client->make('storage');
 
 // list buckets example
@@ -141,7 +141,7 @@ $storage->objects->get('bucket', 'object');
 
 Laravel Example:
 ```php
-// returns instance of \Google_Service_Storage
+// returns instance of \Google\Service\Storage
 $storage = Google::make('storage');
 
 // list buckets example
