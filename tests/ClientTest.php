@@ -16,7 +16,7 @@ class ClientTest extends TestCase
     {
         $client = Mockery::mock('PulkitJalan\Google\Client', [[]])->makePartial();
 
-        $this->assertInstanceOf('Google_Client', $client->getClient());
+        $this->assertInstanceOf('Google\Client', $client->getClient());
     }
 
     public function testClientGetterWithAdditionalConfig()
@@ -34,7 +34,7 @@ class ClientTest extends TestCase
     {
         $client = Mockery::mock('PulkitJalan\Google\Client', [[]])->makePartial();
 
-        $this->assertInstanceOf('Google_Service_Storage', $client->make('storage'));
+        $this->assertInstanceOf('Google\Service\Storage', $client->make('storage'));
     }
 
     public function testServiceMakeException()

@@ -2,8 +2,8 @@
 
 namespace PulkitJalan\Google;
 
-use Google_Client;
 use Illuminate\Support\Arr;
+use Google\Client as GoogleClient;
 use PulkitJalan\Google\Exceptions\UnknownServiceException;
 
 class Client
@@ -14,20 +14,20 @@ class Client
     protected $config;
 
     /**
-     * @var \Google_Client
+     * @var Google\Client
      */
     protected $client;
 
     /**
-     * @param array $config
-     * @param string $userEmail
+     * @param  array  $config
+     * @param  string  $userEmail
      */
     public function __construct(array $config, $userEmail = '')
     {
         $this->config = $config;
 
         // create an instance of the google client for OAuth2
-        $this->client = new Google_Client(Arr::get($config, 'config', []));
+        $this->client = new GoogleClient(Arr::get($config, 'config', []));
 
         // set application name
         $this->client->setApplicationName(Arr::get($config, 'application_name', ''));
@@ -52,7 +52,7 @@ class Client
     /**
      * Getter for the google client.
      *
-     * @return \Google_Client
+     * @return Google\Client
      */
     public function getClient()
     {
@@ -62,11 +62,10 @@ class Client
     /**
      * Setter for the google client.
      *
-     * @param string $client
-     *
+     * @param  string  $client
      * @return self
      */
-    public function setClient(Google_Client $client)
+    public function setClient(GoogleClient $client)
     {
         $this->client = $client;
 
@@ -76,15 +75,14 @@ class Client
     /**
      * Getter for the google service.
      *
-     * @param string $service
+     * @param  string  $service
+     * @return \Google_Service
      *
      * @throws \Exception
-     *
-     * @return \Google_Service
      */
     public function make($service)
     {
-        $service = 'Google_Service_'.ucfirst($service);
+        $service = 'Google\\Service\\'.ucfirst($service);
 
         if (class_exists($service)) {
             $class = new \ReflectionClass($service);
@@ -114,6 +112,7 @@ class Client
 
     /**
      * Determine and use credentials if user has set them.
+     *
      * @param $userEmail
      * @return bool used or not
      */
@@ -137,12 +136,11 @@ class Client
     /**
      * Magic call method.
      *
-     * @param string $method
-     * @param array  $parameters
+     * @param  string  $method
+     * @param  array  $parameters
+     * @return mixed
      *
      * @throws \BadMethodCallException
-     *
-     * @return mixed
      */
     public function __call($method, $parameters)
     {

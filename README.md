@@ -41,7 +41,7 @@ Finally run `php artisan vendor:publish --provider="PulkitJalan\Google\GoogleSer
 
 #### Using an older version of PHP / Laravel?
 
-If you are on a PHP version below 7.2 or a Laravel version below 5.8 just use an older version of this package.
+If you are on a PHP version below 7.2 or a Laravel version below 6.0 just use an older version of this package.
 
 ## Usage
 
@@ -114,7 +114,7 @@ From [Google's upgrading document](https://github.com/google/google-api-php-clie
 > Note: P12s are deprecated in favor of service account JSON, which can be generated in the Credentials section of Google Developer Console.
 
 
-Get `Google_Client`
+Get `Google\Client`
 ```php
 $client = new PulkitJalan\Google\Client($config);
 $googleClient = $client->getClient();
@@ -129,7 +129,7 @@ Get a service
 ```php
 $client = new PulkitJalan\Google\Client($config);
 
-// returns instance of \Google_Service_Storage
+// returns instance of \Google\Service\Storage
 $storage = $client->make('storage');
 
 // list buckets example
@@ -141,7 +141,7 @@ $storage->objects->get('bucket', 'object');
 
 Laravel Example:
 ```php
-// returns instance of \Google_Service_Storage
+// returns instance of \Google\Service\Storage
 $storage = Google::make('storage');
 
 // list buckets example
