@@ -96,7 +96,7 @@ class Client
     /**
      * Setup correct auth method based on type.
      *
-     * @param $userEmail
+     * @param  $userEmail
      * @return void
      */
     protected function auth($userEmail = '')
@@ -113,7 +113,7 @@ class Client
     /**
      * Determine and use credentials if user has set them.
      *
-     * @param $userEmail
+     * @param  $userEmail
      * @return bool used or not
      */
     protected function useAssertCredentials($userEmail = '')
