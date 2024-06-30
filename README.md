@@ -5,10 +5,8 @@ Google Api Client Wrapper
 
 [![Latest Stable Version](https://poser.pugx.org/pulkitjalan/google-apiclient/v/stable?format=flat-square)](https://packagist.org/packages/pulkitjalan/google-apiclient)
 [![MIT License](http://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](http://www.opensource.org/licenses/MIT)
-[![Build Status](http://img.shields.io/travis/pulkitjalan/google-apiclient.svg?style=flat-square)](https://travis-ci.org/pulkitjalan/google-apiclient)
-[![Quality Score](http://img.shields.io/scrutinizer/g/pulkitjalan/google-apiclient/master.svg?style=flat-square)](https://scrutinizer-ci.com/g/pulkitjalan/google-apiclient/)
-[![Coverage Status](https://img.shields.io/scrutinizer/coverage/g/pulkitjalan/google-apiclient/master.svg?style=flat-square)](https://scrutinizer-ci.com/g/pulkitjalan/google-apiclient/code-structure/master)
-[![StyleCI](https://styleci.io/repos/29422724/shield)](https://styleci.io/repos/29422724)
+[![Run Tests](https://github.com/pulkitjalan/google-apiclient/actions/workflows/run-tests.yml/badge.svg)](https://github.com/pulkitjalan/google-apiclient/actions/workflows/run-tests.yml)
+[![Coverage](https://codecov.io/gh/pulkitjalan/google-apiclient/branch/main/graph/badge.svg?token=dpjZ4Tszxm)](https://codecov.io/gh/pulkitjalan/google-apiclient)
 [![Total Downloads](https://img.shields.io/packagist/dt/pulkitjalan/google-apiclient.svg?style=flat-square)](https://packagist.org/packages/pulkitjalan/google-apiclient)
 
 ## Requirements
@@ -41,7 +39,7 @@ Finally run `php artisan vendor:publish --provider="PulkitJalan\Google\GoogleSer
 
 #### Using an older version of PHP / Laravel?
 
-If you are on a PHP version below 8.0 or a Laravel version below 8.0 just use an older version of this package.
+If you are on a PHP version below 8.0 or a Laravel version below 10.0, use an older version of this package.
 
 ## Usage
 
@@ -103,6 +101,20 @@ return [
         */
         'file' => '',
     ],
+
+    /*
+    |----------------------------------------------------------------------------
+    | Additional config for the Google Client
+    |----------------------------------------------------------------------------
+    |
+    | Set any additional config variables supported by the Google Client
+    | Details can be found here:
+    | https://github.com/google/google-api-php-client/blob/master/src/Google/Client.php
+    |
+    | NOTE: If client id is specified here, it will get over written by the one above.
+    |
+    */
+    'config' => [],
 ];
 
 ```
@@ -143,6 +155,8 @@ Laravel Example:
 ```php
 // returns instance of \Google\Service\Storage
 $storage = Google::make('storage');
+// or
+$storage = Google::make(\Google\Service\Storage::class);
 
 // list buckets example
 $storage->buckets->listBuckets('project id');
