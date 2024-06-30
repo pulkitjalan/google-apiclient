@@ -11,8 +11,11 @@
     </testsuites>
     <source>
         <include>
-            <directory suffix=".php">./app</directory>
             <directory suffix=".php">./src</directory>
         </include>
+        <exclude>
+            <file>./src/GoogleServiceProvider.php</file>
+            <file>./src/Facades/Google.php</file>
+        </exclude>
     </source>
 </phpunit>
