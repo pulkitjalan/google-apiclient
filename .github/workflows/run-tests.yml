@@ -43,7 +43,7 @@ jobs:
         run: vendor/bin/pest --coverage
 
       - name: Execute tests - without coverage
-        if: steps.test.outcome != 'skipped'
+        if: steps.test.outcome == 'skipped'
         run: vendor/bin/pest
 
       - name: Upload coverage reports to Codecov
