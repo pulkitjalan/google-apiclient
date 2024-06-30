@@ -24,11 +24,37 @@ test('client getter with additional config', function () {
     expect('test')->toEqual($client->getClient()->getConfig('subject'));
 });
 
+test('client sets prompt or approval_prompt', function () {
+    $client = new Client([
+        'prompt' => 'auto',
+        'approval_prompt' => 'consent',
+    ]);
+
+    // default value should be empty
+    expect('auto')->toEqual($client->getClient()->getConfig('prompt'));
+
+    // default value should be auto, since prompt is set, it should be ignored
+    expect('auto')->toEqual($client->getClient()->getConfig('approval_prompt'));
+});
+
+test('client sets approval_prompt', function () {
+    $client = new Client([
+        'approval_prompt' => 'consent',
+    ]);
+
+    // default value should be empty
+    expect('')->toEqual($client->getClient()->getConfig('prompt'));
+
+    // default value should be auto
+    expect('consent')->toEqual($client->getClient()->getConfig('approval_prompt'));
+});
+
 test('service make', function () {
     $client = new Client();
 
     expect($client->make('storage'))->toBeInstanceOf(Storage::class);
-    expect($client->make(Storage::class))->toBeInstanceOf(Storage::class);
+    expect($storage = $client->make(Storage::class))->toBeInstanceOf(Storage::class);
+    expect($client->make($storage))->toBeInstanceOf(Storage::class);
 });
 
 test('service make exception', function () {
