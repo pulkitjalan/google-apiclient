@@ -38,10 +38,11 @@ jobs:
           composer update --${{ matrix.dependency-version }} --prefer-dist --no-interaction --no-suggest
 
       - name: Execute tests
-        run: vendor/bin/pest --coverage --coverage-xml build
+        run: vendor/bin/pest --coverage --coverage-clover ./coverage.xml
 
       - name: Upload coverage reports to Codecov
         uses: codecov/codecov-action@v4
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
-          directory: build
+          files: ./coverage.xml
+          verbose: true
