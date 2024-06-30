@@ -35,18 +35,19 @@ jobs:
       - name: Install dependencies
         run: |
           composer require "laravel/framework:${{ matrix.laravel }}" --no-interaction --no-update
-          composer update --${{ matrix.dependency-version }} --prefer-dist --no-interaction --no-suggest
-
-      - name: Execute tests - without coverage
-        if: matrix.dependency-version != 'prefer-stable'
-        run: vendor/bin/pest
+          composer update --${{ matrix.dependency-version }} --prefer-dist --no-interaction
 
       - name: Execute tests - with coverage
-        if: matrix.dependency-version == 'prefer-stable'
+        id: test
+        if: matrix.dependency-version == 'prefer-stable' && matrix.php == 8.3 && matrix.laravel == '^11.0'
         run: vendor/bin/pest --coverage
 
+      - name: Execute tests - without coverage
+        if: steps.test.outcome != 'skipped'
+        run: vendor/bin/pest
+
       - name: Upload coverage reports to Codecov
-        if: matrix.dependency-version == 'prefer-stable'
+        if: steps.test.outcome == 'success'
         uses: codecov/codecov-action@v4
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
