@@ -101,6 +101,20 @@ return [
         */
         'file' => '',
     ],
+
+    /*
+    |----------------------------------------------------------------------------
+    | Additional config for the Google Client
+    |----------------------------------------------------------------------------
+    |
+    | Set any additional config variables supported by the Google Client
+    | Details can be found here:
+    | https://github.com/google/google-api-php-client/blob/master/src/Google/Client.php
+    |
+    | NOTE: If client id is specified here, it will get over written by the one above.
+    |
+    */
+    'config' => [],
 ];
 
 ```
