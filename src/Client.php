@@ -41,10 +41,7 @@ class Client
 
         if (Arr::has($config, 'prompt')) {
             $this->client->setPrompt(Arr::get($config, 'prompt', 'auto'));
-        }
-
-        // @deprecated
-        if (Arr::has($config, 'approval_prompt')) {
+        } else if (Arr::has($config, 'approval_prompt')) {
             $this->client->setApprovalPrompt(Arr::get($config, 'approval_prompt', 'auto'));
         }
 
