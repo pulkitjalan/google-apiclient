@@ -8,4 +8,3 @@ build
 .phpunit.result.cache
 .php-cs-fixer.cache
 phpunit.xml
-coverage.xml
