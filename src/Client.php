@@ -4,6 +4,7 @@ namespace PulkitJalan\Google;
 
 use Illuminate\Support\Arr;
 use Google\Client as GoogleClient;
+use Google\Service as GoogleService;
 use PulkitJalan\Google\Exceptions\UnknownServiceException;
 
 class Client
@@ -22,7 +23,7 @@ class Client
      * @param  array  $config
      * @param  string  $userEmail
      */
-    public function __construct(array $config, $userEmail = '')
+    public function __construct(array $config = [], $userEmail = '')
     {
         $this->config = $config;
 
@@ -76,18 +77,24 @@ class Client
      * Getter for the google service.
      *
      * @param  string  $service
-     * @return \Google_Service
+     * @return \Google\Service
      *
      * @throws \Exception
      */
     public function make($service)
     {
-        $service = 'Google\\Service\\'.ucfirst($service);
+        if ($service instanceof GoogleService) {
+            return $service;
+        }
+
+        if (str_starts_with($service, 'Google\\Service\\')) {
+            return new $service($this->client);
+        }
+
+        $service = 'Google\\Service\\'.ucfirst(str_replace('_', '', $service));
 
         if (class_exists($service)) {
-            $class = new \ReflectionClass($service);
-
-            return $class->newInstance($this->client);
+            return new $service($this->client);
         }
 
         throw new UnknownServiceException($service);

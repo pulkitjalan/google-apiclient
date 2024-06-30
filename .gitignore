@@ -1,8 +1,10 @@
-/vendor
+vendor
 composer.lock
 .DS_Store
-/build
-/.idea
-/.vscode
+build
+.idea
+.vscode
+.phpunit.cache
 .phpunit.result.cache
-.php_cs.cache
+.php-cs-fixer.cache
+phpunit.xml
