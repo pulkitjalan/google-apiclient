@@ -2,9 +2,9 @@
 
 namespace PulkitJalan\Google;
 
-use Illuminate\Support\Arr;
 use Google\Client as GoogleClient;
 use Google\Service as GoogleService;
+use Illuminate\Support\Arr;
 use PulkitJalan\Google\Exceptions\UnknownServiceException;
 
 class Client
@@ -20,7 +20,6 @@ class Client
     protected $client;
 
     /**
-     * @param  array  $config
      * @param  string  $userEmail
      */
     public function __construct(array $config = [], $userEmail = '')
@@ -103,7 +102,6 @@ class Client
     /**
      * Setup correct auth method based on type.
      *
-     * @param  $userEmail
      * @return void
      */
     protected function auth($userEmail = '')
@@ -120,7 +118,6 @@ class Client
     /**
      * Determine and use credentials if user has set them.
      *
-     * @param  $userEmail
      * @return bool used or not
      */
     protected function useAssertCredentials($userEmail = '')

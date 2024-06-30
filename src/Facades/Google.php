@@ -2,8 +2,8 @@
 
 namespace PulkitJalan\Google\Facades;
 
-use PulkitJalan\Google\Client;
 use Illuminate\Support\Facades\Facade;
+use PulkitJalan\Google\Client;
 
 /**
  * @mixin Client

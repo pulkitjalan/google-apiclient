@@ -3,9 +3,9 @@
 namespace PulkitJalan\Google\Tests;
 
 use BadMethodCallException;
+use Google\Client as GoogleClient;
 use Google\Service\Storage;
 use PulkitJalan\Google\Client;
-use Google\Client as GoogleClient;
 use PulkitJalan\Google\Exceptions\UnknownServiceException;
 
 test('client getter', function () {
