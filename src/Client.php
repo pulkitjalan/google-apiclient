@@ -2,9 +2,9 @@
 
 namespace PulkitJalan\Google;
 
+use Illuminate\Support\Arr;
 use Google\Client as GoogleClient;
 use Google\Service as GoogleService;
-use Illuminate\Support\Arr;
 use PulkitJalan\Google\Exceptions\UnknownServiceException;
 
 class Client
