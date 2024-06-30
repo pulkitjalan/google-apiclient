@@ -14,6 +14,14 @@ test('client getter', function () {
     expect($client->getClient())->toBeInstanceOf(GoogleClient::class);
 });
 
+test('client setter', function () {
+    $client = new Client();
+
+    $client = $client->setClient($googleClient = new GoogleClient());
+
+    expect($client->getClient())->toBe($googleClient);
+});
+
 test('client getter with additional config', function () {
     $client = new Client([
         'config' => [
