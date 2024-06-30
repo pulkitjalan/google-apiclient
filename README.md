@@ -68,7 +68,7 @@ return [
     'redirect_uri' => '',
     'scopes' => [],
     'access_type' => 'online',
-    'approval_prompt' => 'auto',
+    'prompt' => 'auto',
 
     /*
     |----------------------------------------------------------------------------
