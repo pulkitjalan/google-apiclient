@@ -73,6 +73,30 @@ test('service make exception', function () {
     $client->make('storag');
 });
 
+test('service make exception when file removed', function () {
+    $client = new Client();
+
+    $this->expectException(UnknownServiceException::class);
+
+    // rename file to pretend it doesn't exist
+    rename(
+        __DIR__.'/../../vendor/google/apiclient-services/src/Storage.php',
+        __DIR__.'/../../vendor/google/apiclient-services/src/Storage.php.bak'
+    );
+
+    try {
+        $client->make('storage');
+    } catch (UnknownServiceException $e) {
+        // restore file
+        rename(
+            __DIR__.'/../../vendor/google/apiclient-services/src/Storage.php.bak',
+            __DIR__.'/../../vendor/google/apiclient-services/src/Storage.php'
+        );
+
+        throw $e;
+    }
+});
+
 test('magic method exception', function () {
     $client = new Client();
 
