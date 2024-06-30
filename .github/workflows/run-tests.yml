@@ -14,11 +14,12 @@ jobs:
       matrix:
         php: [8.3, 8.2, 8.1]
         laravel: ["^11.0", "^10.0"]
+        dependency-version: [prefer-lowest, prefer-stable]
         exclude:
           - laravel: "^11.0"
             php: 8.1
 
-    name: P${{ matrix.php }} - L${{ matrix.laravel }}
+    name: P${{ matrix.php }} - L${{ matrix.laravel }} - ${{ matrix.dependency-version }}
 
     steps:
       - name: Checkout code
@@ -34,12 +35,18 @@ jobs:
       - name: Install dependencies
         run: |
           composer require "laravel/framework:${{ matrix.laravel }}" --no-interaction --no-update
-          composer update --prefer-stable --prefer-dist --no-interaction --no-suggest
+          composer update --${{ matrix.dependency-version }} --prefer-dist --no-interaction --no-suggest
 
-      - name: Execute tests
+      - name: Execute tests - without coverage
+        if: matrix.dependency-version != 'prefer-stable'
+        run: vendor/bin/pest
+
+      - name: Execute tests - with coverage
+        if: matrix.dependency-version == 'prefer-stable'
         run: vendor/bin/pest --coverage
 
       - name: Upload coverage reports to Codecov
+        if: matrix.dependency-version == 'prefer-stable'
         uses: codecov/codecov-action@v4
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
