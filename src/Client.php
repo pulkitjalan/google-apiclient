@@ -38,7 +38,15 @@ class Client
         $this->client->setRedirectUri(Arr::get($config, 'redirect_uri', ''));
         $this->client->setScopes(Arr::get($config, 'scopes', []));
         $this->client->setAccessType(Arr::get($config, 'access_type', 'online'));
-        $this->client->setApprovalPrompt(Arr::get($config, 'approval_prompt', 'auto'));
+
+        if (Arr::has($config, 'prompt')) {
+            $this->client->setPrompt(Arr::get($config, 'prompt', 'auto'));
+        }
+
+        // @deprecated
+        if (Arr::has($config, 'approval_prompt')) {
+            $this->client->setApprovalPrompt(Arr::get($config, 'approval_prompt', 'auto'));
+        }
 
         // set developer key
         $this->client->setDeveloperKey(Arr::get($config, 'developer_key', ''));
