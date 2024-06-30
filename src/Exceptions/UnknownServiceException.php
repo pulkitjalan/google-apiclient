@@ -2,4 +2,7 @@
 
 namespace PulkitJalan\Google\Exceptions;
 
-class UnknownServiceException extends \Exception {}
+class UnknownServiceException extends \Exception
+{
+    //
+}
