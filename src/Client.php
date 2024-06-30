@@ -39,6 +39,7 @@ class Client
         $this->client->setScopes(Arr::get($config, 'scopes', []));
         $this->client->setAccessType(Arr::get($config, 'access_type', 'online'));
 
+        // only allow prompt or approval_prompt
         if (Arr::has($config, 'prompt')) {
             $this->client->setPrompt(Arr::get($config, 'prompt', 'auto'));
         } elseif (Arr::has($config, 'approval_prompt')) {
