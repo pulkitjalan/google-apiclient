@@ -4,7 +4,6 @@
          bootstrap="vendor/autoload.php"
          colors="true"
 >
-    <coverage/>
     <testsuites>
         <testsuite name="Test Suite">
             <directory suffix="Test.php">./tests</directory>
@@ -12,11 +11,8 @@
     </testsuites>
     <source>
         <include>
-            <directory suffix=".php">./src</directory>
+            <file>./src/Client.php</file>
+            <directory suffix=".php">./src/Exceptions</directory>
         </include>
-        <exclude>
-            <file>./src/GoogleServiceProvider.php</file>
-            <file>./src/Facades/Google.php</file>
-        </exclude>
     </source>
 </phpunit>
