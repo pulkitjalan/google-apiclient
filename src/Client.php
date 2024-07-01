@@ -104,13 +104,15 @@ class Client
             }
             // catch any errors thrown when fetching the service
             // this can be caused when the service was removed
-            // but the reference still exists in the autoloader
+            // but the reference still exists in the auto loader
+            // @codeCoverageIgnoreStart
         } catch (\ErrorException $e) {
             if (str_contains($e->getMessage(), 'No such file or directory')) {
                 UnknownServiceException::throwForService($service, 0, $e);
             }
 
             throw $e;
+            // @codeCoverageIgnoreEnd
         }
 
         UnknownServiceException::throwForService($service);
