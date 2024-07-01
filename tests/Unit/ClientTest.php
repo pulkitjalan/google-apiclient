@@ -29,7 +29,17 @@ test('client getter with additional config', function () {
         ],
     ]);
 
-    expect('test')->toEqual($client->getClient()->getConfig('subject'));
+    expect($client->getClient()->getConfig('subject'))->toEqual('test');
+});
+
+test('client fallback to use application default credentials', function () {
+    $client = new Client([
+        'service' => [
+            'enable' => true,
+        ],
+    ]);
+
+    expect($client->getClient()->isUsingApplicationDefaultCredentials())->toBeTrue();
 });
 
 test('client sets prompt or approval_prompt', function () {
@@ -39,10 +49,10 @@ test('client sets prompt or approval_prompt', function () {
     ]);
 
     // default value should be empty
-    expect('auto')->toEqual($client->getClient()->getConfig('prompt'));
+    expect($client->getClient()->getConfig('prompt'))->toEqual('auto');
 
     // default value should be auto, since prompt is set, it should be ignored
-    expect('auto')->toEqual($client->getClient()->getConfig('approval_prompt'));
+    expect($client->getClient()->getConfig('approval_prompt'))->toEqual('auto');
 });
 
 test('client sets approval_prompt', function () {
@@ -51,10 +61,10 @@ test('client sets approval_prompt', function () {
     ]);
 
     // default value should be empty
-    expect('')->toEqual($client->getClient()->getConfig('prompt'));
+    expect($client->getClient()->getConfig('prompt'))->toBeEmpty();
 
     // default value should be auto
-    expect('consent')->toEqual($client->getClient()->getConfig('approval_prompt'));
+    expect($client->getClient()->getConfig('approval_prompt'))->toEqual('consent');
 });
 
 test('service make', function () {
@@ -68,18 +78,14 @@ test('service make', function () {
 test('service make exception', function () {
     $client = new Client();
 
-    $this->expectException(UnknownServiceException::class);
-
     $client->make('storag');
-});
+})->throws(UnknownServiceException::class);
 
 test('magic method exception', function () {
     $client = new Client();
 
-    $this->expectException(BadMethodCallException::class);
-
     $client->getAuthTest();
-});
+})->throws(BadMethodCallException::class);
 
 test('no credentials', function () {
     $client = new Client();
