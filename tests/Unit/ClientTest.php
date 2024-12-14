@@ -9,15 +9,15 @@ use Google\Client as GoogleClient;
 use PulkitJalan\Google\Exceptions\UnknownServiceException;
 
 test('client getter', function () {
-    $client = new Client();
+    $client = new Client;
 
     expect($client->getClient())->toBeInstanceOf(GoogleClient::class);
 });
 
 test('client setter', function () {
-    $client = new Client();
+    $client = new Client;
 
-    $client = $client->setClient($googleClient = new GoogleClient());
+    $client = $client->setClient($googleClient = new GoogleClient);
 
     expect($client->getClient())->toBe($googleClient);
 });
@@ -68,7 +68,7 @@ test('client sets approval_prompt', function () {
 });
 
 test('service make', function () {
-    $client = new Client();
+    $client = new Client;
 
     expect($client->make('storage'))->toBeInstanceOf(Storage::class);
     expect($storage = $client->make(Storage::class))->toBeInstanceOf(Storage::class);
@@ -76,19 +76,19 @@ test('service make', function () {
 });
 
 test('service make exception', function () {
-    $client = new Client();
+    $client = new Client;
 
     $client->make('storag');
 })->throws(UnknownServiceException::class);
 
 test('magic method exception', function () {
-    $client = new Client();
+    $client = new Client;
 
     $client->getAuthTest();
 })->throws(BadMethodCallException::class);
 
 test('no credentials', function () {
-    $client = new Client();
+    $client = new Client;
 
     expect($client->isUsingApplicationDefaultCredentials())->toBeFalse();
 });
