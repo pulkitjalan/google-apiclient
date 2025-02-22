@@ -50,5 +50,7 @@
                 "Google": "PulkitJalan\\Google\\Facades\\Google"
             }
         }
-    }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
 }
