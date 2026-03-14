@@ -6,7 +6,7 @@ use PulkitJalan\Google\Client;
 use Illuminate\Support\Facades\Facade;
 
 /**
- * @mixin Client
+ * @mixin \PulkitJalan\Google\Client
  */
 class Google extends Facade
 {

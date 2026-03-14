@@ -15,7 +15,7 @@ class Client
     protected $config;
 
     /**
-     * @var Google\Client
+     * @var \Google\Client
      */
     protected $client;
 
@@ -58,7 +58,7 @@ class Client
     /**
      * Getter for the google client.
      *
-     * @return Google\Client
+     * @return \Google\Client
      */
     public function getClient()
     {
@@ -68,7 +68,7 @@ class Client
     /**
      * Setter for the google client.
      *
-     * @param  string  $client
+     * @param  \Google\Client  $client
      * @return self
      */
     public function setClient(GoogleClient $client)
