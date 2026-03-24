@@ -1,56 +1,56 @@
 {
-    "name": "pulkitjalan/google-apiclient",
-    "description": "Google api php client wrapper with Cloud Platform and Laravel support",
-    "homepage": "https://github.com/pulkitjalan/google-apiclient",
-    "keywords": [
-        "laravel",
-        "google",
-        "cloud platform"
-    ],
-    "license": "MIT",
-    "authors": [
-        {
-            "name": "Pulkit Jalan"
-        }
-    ],
-    "require": {
-        "php": ">=8.0",
-        "illuminate/support": "^8.0|^9.0|^10.0|^11.0|^12.0",
-        "google/apiclient": "^2.16"
-    },
-    "require-dev": {
-        "mockery/mockery": "^1.6",
-        "pestphp/pest": "^1.20|^2.0|^3.7"
-    },
-    "autoload": {
-        "psr-4": {
-            "PulkitJalan\\Google\\": "src"
-        }
-    },
-    "autoload-dev": {
-        "psr-4": {
-            "PulkitJalan\\Google\\Tests\\": "tests"
-        }
-    },
-    "scripts": {
-        "test": "vendor/bin/pest"
-    },
-    "config": {
-        "sort-packages": true,
-        "allow-plugins": {
-            "pestphp/pest-plugin": true
-        }
-    },
-    "extra": {
-        "laravel": {
-            "providers": [
-                "PulkitJalan\\Google\\GoogleServiceProvider"
-            ],
-            "aliases": {
-                "Google": "PulkitJalan\\Google\\Facades\\Google"
-            }
-        }
-    },
-    "minimum-stability": "dev",
-    "prefer-stable": true
+  "name": "pulkitjalan/google-apiclient",
+  "description": "Google api php client wrapper with Cloud Platform and Laravel support",
+  "homepage": "https://github.com/pulkitjalan/google-apiclient",
+  "keywords": [
+    "laravel",
+    "google",
+    "cloud platform"
+  ],
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Pulkit Jalan"
+    }
+  ],
+  "require": {
+    "php": ">=8.0",
+    "illuminate/support": "^8.0|^9.0|^10.0|^11.0|^12.0|^13.0",
+    "google/apiclient": "^2.16"
+  },
+  "require-dev": {
+    "mockery/mockery": "^1.6",
+    "pestphp/pest": "^1.20|^2.0|^3.7|^4.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "PulkitJalan\\Google\\": "src"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "PulkitJalan\\Google\\Tests\\": "tests"
+    }
+  },
+  "scripts": {
+    "test": "vendor/bin/pest"
+  },
+  "config": {
+    "sort-packages": true,
+    "allow-plugins": {
+      "pestphp/pest-plugin": true
+    }
+  },
+  "extra": {
+    "laravel": {
+      "providers": [
+        "PulkitJalan\\Google\\GoogleServiceProvider"
+      ],
+      "aliases": {
+        "Google": "PulkitJalan\\Google\\Facades\\Google"
+      }
+    }
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true
 }
