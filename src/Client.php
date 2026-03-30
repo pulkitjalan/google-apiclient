@@ -2,6 +2,7 @@
 
 namespace PulkitJalan\Google;
 
+use Google\Service;
 use Illuminate\Support\Arr;
 use Google\Client as GoogleClient;
 use Google\Service as GoogleService;
@@ -82,7 +83,7 @@ class Client
      * Getter for the google service.
      *
      * @param  string  $service
-     * @return \Google\Service
+     * @return Service
      *
      * @throws \Exception
      */
